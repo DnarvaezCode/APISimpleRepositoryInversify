@@ -1,3 +1,3 @@
 export abstract class BaseApplication {
-  abstract setup(): Promise<void> | void;
+  abstract main(): Promise<void> | void;
 }

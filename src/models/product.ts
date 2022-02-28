@@ -1,5 +1,6 @@
-import mongoose from "mongoose";
-export const productSchema = new mongoose.Schema({
+import { IProduct } from "./interfaces/interface.product";
+import { Schema } from "mongoose";
+export const productSchema = new Schema<IProduct>({
   name: {
     type: String,
     required: true,
@@ -31,7 +32,7 @@ export const productSchema = new mongoose.Schema({
     default: 0,
   },
   category: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: "Category",
     required: true,
   },
@@ -57,5 +58,3 @@ export const productSchema = new mongoose.Schema({
     default: true,
   },
 });
-
-//export type Product = typeof productSchema

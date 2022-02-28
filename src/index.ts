@@ -4,8 +4,8 @@ import { App } from "./application";
 import "./controllers/product.controller";
 import "./controllers/category.controller";
 
-export async function run() {
-  new App().setup();
+export async function runApp() {
+  new App().main();
 }
 
-run();
+runApp();

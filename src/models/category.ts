@@ -1,6 +1,7 @@
-import mongoose from "mongoose";
+import { Schema } from "mongoose";
+import { ICategory } from "./interfaces/interface.category";
 
-export const categorySchema = new mongoose.Schema({
+export const categorySchema = new Schema<ICategory>({
   name: {
     type: String,
     required: true,

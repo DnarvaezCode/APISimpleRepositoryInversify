@@ -1,13 +1,13 @@
-import mongoose from "mongoose";
+import { IProduct } from "./../models/interfaces/interface.product";
+import { ICategory } from "./../models/interfaces/interface.category";
+import { model, connect } from "mongoose";
 import { injectable } from "inversify";
 import { categorySchema } from "../models/category";
 import { productSchema } from "../models/product";
 
 @injectable()
 export class DbContext {
-  private _db: typeof mongoose;
   private _connectionString: string;
-
   /**
    *Inicializar propiedades a través del constructor.
    */
@@ -16,7 +16,8 @@ export class DbContext {
   }
   async connect() {
     try {
-      this._db = await mongoose.connect(this._connectionString);
+      await connect(this._connectionString);
+      console.log("Database is conected!");
     } catch (error) {
       console.log(error);
     }
@@ -24,8 +25,8 @@ export class DbContext {
 
   get entity() {
     return {
-      products: this._db.model("Product", productSchema),
-      categories: this._db.model("Category", categorySchema),
+      products: model<IProduct>("Product", productSchema),
+      categories: model<ICategory>("Category", categorySchema),
     };
   }
 }

@@ -1,18 +1,18 @@
-import express from "express";
+import express, { Application } from "express";
 import { InversifyExpressServer } from "inversify-express-utils";
 import { container } from "./container";
 import { BaseApplication } from "./utils/base.application";
 import { DbContext } from "./db/connect";
 
 export class App extends BaseApplication {
-  setup() {
+  main() {
     const db = container.get(DbContext);
 
     db.connect();
 
     const server = new InversifyExpressServer(container);
 
-    server.setConfig((app) => {
+    server.setConfig((app: Application) => {
       app.use(express.json());
     });
 
